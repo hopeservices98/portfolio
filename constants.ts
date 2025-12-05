@@ -19,6 +19,12 @@ export const projects: Project[] = [
     link: "https://cip-rabemananjara.mg/"
   },
   {
+    title: "Site Web Hope Services",
+    description: "Développement d'un site web professionnel pour Hope Services, présentant les services de l'entreprise avec un design moderne et responsive. Interface optimisée pour l'expérience utilisateur avec navigation fluide et contenu bien structuré.",
+    technologies: ["React", "Vercel", "Responsive Design", "Modern UI"],
+    link: "https://hope-services-website.vercel.app/"
+  },
+  {
     title: "Scripts d'Automatisation de Scraping",
     description: "Création de scripts avancés pour le web scraping éthique, la manipulation et l'analyse de données pour des missions en freelance. Automatisation de la collecte de données pour générer des insights.",
     technologies: ["Python", "Beautiful Soup", "Pandas", "Scrapy"],
