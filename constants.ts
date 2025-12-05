@@ -13,22 +13,16 @@ export const projects: Project[] = [
     link: "https://www.moramarket.mg/?srsltid=AfmBOop5SSFF7q5drXHf4iPrKUkJXh8yU6a8HyxVSRjDZC_RrgR9iDNj"
   },
   {
-    title: "Outil d'Analyse de Sentiment",
-    description: "Un script Python qui utilise des techniques de traitement du langage naturel (NLP) pour analyser le sentiment de textes. Intégration avec des API de réseaux sociaux pour la collecte de données.",
-    technologies: ["Python", "NLTK", "TextBlob", "Tweepy", "Pandas"],
-    link: "https://github.com/angelorak98"
+    title: "Site Web Cabinet Rabemananjara",
+    description: "Développement du site vitrine pour le Cabinet Rabemananjara, expert en propriété industrielle à Madagascar. Présentation des services de protection des marques, brevets et dessins industriels.",
+    technologies: ["React", "Tailwind CSS", "Responsive Design"],
+    link: "https://cip-rabemananjara.mg/"
   },
   {
     title: "Scripts d'Automatisation de Scraping",
     description: "Création de scripts avancés pour le web scraping éthique, la manipulation et l'analyse de données pour des missions en freelance. Automatisation de la collecte de données pour générer des insights.",
     technologies: ["Python", "Beautiful Soup", "Pandas", "Scrapy"],
     link: "https://github.com/angelorak98/twitter_scrapy"
-  },
-  {
-    title: "Automatisation de Rapports Excel",
-    description: "Script Python pour générer automatiquement des rapports financiers à partir de données brutes. Utilise OpenPyXL pour lire et écrire des fichiers Excel, et Pandas pour la manipulation des données.",
-    technologies: ["Python", "Pandas", "OpenPyXL"],
-    link: "https://github.com/angelorak98/excel-report-automation"
   }
 ];
 
