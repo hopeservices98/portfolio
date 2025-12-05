@@ -25,6 +25,12 @@ export const projects: Project[] = [
     link: "https://hope-services-website.vercel.app/"
   },
   {
+    title: "Application Web Jenny v2",
+    description: "Développement d'une application web moderne avec interface IA conversationnelle élégante. Features incluent des vidéos de fond interactives, animations CSS avancées, système de sliders automatique, effets visuels glassmorphism et gradients. Interface responsive avec Tailwind CSS et animations fluides.",
+    technologies: ["HTML5", "CSS3", "Tailwind CSS", "JavaScript", "Responsive Design", "Animations CSS"],
+    link: "https://jenny-v2.vercel.app/"
+  },
+  {
     title: "Scripts d'Automatisation de Scraping",
     description: "Création de scripts avancés pour le web scraping éthique, la manipulation et l'analyse de données pour des missions en freelance. Automatisation de la collecte de données pour générer des insights.",
     technologies: ["Python", "Beautiful Soup", "Pandas", "Scrapy"],
