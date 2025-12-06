@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { CustomCursor } from './components/CustomCursor';
+import { Navbar } from './components/Navbar';
 import { Header } from './components/Header';
 import { Section } from './components/Section';
 import { ProjectCard } from './components/ProjectCard';
@@ -11,14 +13,16 @@ import { projects, experiences, formations, skills } from './constants';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30">
+    <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30 md:cursor-none">
+      <CustomCursor />
+      <Navbar />
       <main className="container mx-auto max-w-5xl px-6 py-12 md:py-24 flex flex-col gap-20 md:gap-32">
         <div className="flex flex-col gap-10 md:gap-16">
           <Header />
           <SocialLinks />
         </div>
 
-        <Section title="Compétences">
+        <Section title="Compétences" id="competences">
           <div className="flex flex-wrap gap-2">
             {skills.map((skill) => (
               <SkillBadge key={skill} skill={skill} />
@@ -26,7 +30,7 @@ const App: React.FC = () => {
           </div>
         </Section>
 
-        <Section title="Projets">
+        <Section title="Projets" id="projets">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
             {projects.map((project, index) => (
               <ProjectCard key={index} project={project} />
@@ -34,7 +38,7 @@ const App: React.FC = () => {
           </div>
         </Section>
 
-        <Section title="Expériences Professionnelles">
+        <Section title="Expériences Professionnelles" id="experiences">
           <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
             {experiences.map((exp, index) => (
               <ExperienceCard key={index} item={exp} index={index} />
@@ -42,7 +46,7 @@ const App: React.FC = () => {
           </div>
         </Section>
 
-        <Section title="Formations">
+        <Section title="Formations" id="formations">
           <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
             {formations.map((formation, index) => (
               <ExperienceCard key={index} item={formation} index={index} />
