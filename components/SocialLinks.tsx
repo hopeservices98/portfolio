@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Puzzle3D } from './Puzzle3D';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const LinkedInIcon: React.FC = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
@@ -73,6 +74,7 @@ const SocialCard: React.FC<SocialCardProps> = ({ href, icon, label, color, detai
 
 export const SocialLinks: React.FC = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
+  const isMobile = useIsMobile();
   const address = "Lot 22 D Ter Imerinafovoany, Antananarivo, Madagascar";
   const gmapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
@@ -84,7 +86,19 @@ export const SocialLinks: React.FC = () => {
           <p className="text-slate-400 text-sm">
             Trouvez le logo de mon langage préféré et cliquez dessus pour déverrouiller. Lisez bien mon portfolio pour trouver la réponse.
           </p>
-          <Puzzle3D onSolved={() => setIsUnlocked(true)} />
+          {isMobile ? (
+            <div className="flex flex-col items-center gap-4">
+              <img src="/profil.png" alt="Angelo Rakotonirina" className="w-24 h-24 rounded-full border-2 border-slate-600 object-cover" />
+              <button
+                onClick={() => setIsUnlocked(true)}
+                className="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-full font-semibold transition-colors text-sm"
+              >
+                Déverrouiller les coordonnées
+              </button>
+            </div>
+          ) : (
+            <Puzzle3D onSolved={() => setIsUnlocked(true)} />
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
