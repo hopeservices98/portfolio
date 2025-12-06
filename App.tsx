@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useIsMobile } from './hooks/useIsMobile';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Header } from './components/Header';
@@ -12,9 +13,11 @@ import { Footer } from './components/Footer';
 import { projects, experiences, formations, skills } from './constants';
 
 const App: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30 md:cursor-none">
-      <CustomCursor />
+    <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30">
+      {!isMobile && <CustomCursor />}
       <Navbar />
       <main className="container mx-auto max-w-5xl px-6 py-12 md:py-24 flex flex-col gap-20 md:gap-32">
         <div className="flex flex-col gap-10 md:gap-16">
