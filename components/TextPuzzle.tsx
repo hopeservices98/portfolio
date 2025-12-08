@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 interface TextPuzzleProps {
   fullText: string;
@@ -22,7 +23,14 @@ export const TextPuzzle: React.FC<TextPuzzleProps> = ({ fullText }) => {
   useEffect(() => {
     const isCorrect = pieces.every((val, index) => val === index);
     if (isCorrect && pieces.length > 0) {
-      setTimeout(() => setIsSolved(true), 300); // Add a small delay for the animation
+      setTimeout(() => {
+        setIsSolved(true);
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }, 300);
     }
   }, [pieces]);
 
@@ -58,8 +66,16 @@ export const TextPuzzle: React.FC<TextPuzzleProps> = ({ fullText }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="p-6 text-slate-200 text-sm md:text-base font-medium leading-relaxed"
+            className="p-6 text-slate-200 text-sm md:text-base font-medium leading-relaxed relative"
           >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring" }}
+              className="absolute -top-3 -right-3 bg-teal-500 text-slate-900 text-xs font-bold px-2 py-1 rounded-full shadow-lg transform rotate-12"
+            >
+              Bravo ! 🎉
+            </motion.div>
             {fullText}
           </motion.div>
         ) : (
