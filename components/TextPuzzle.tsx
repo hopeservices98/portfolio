@@ -75,7 +75,7 @@ export const TextPuzzle: React.FC<TextPuzzleProps> = ({ fullText }) => {
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="absolute -top-3 -right-3 bg-gradient-to-r from-teal-400 to-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-teal-500/30 transform rotate-6 border border-white/20 z-10"
+              className="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-black px-4 py-2 rounded-full shadow-xl shadow-orange-500/30 transform rotate-6 border-2 border-white z-20 animate-pulse"
             >
               MISSION ACCOMPLIE ! 🚀
             </motion.div>
@@ -132,8 +132,8 @@ export const TextPuzzle: React.FC<TextPuzzleProps> = ({ fullText }) => {
                   
                   <div className="absolute inset-0 border border-slate-600/30 pointer-events-none" />
                   <div
-                    className={`absolute text-xs font-bold text-teal-400 bg-slate-900/80 px-1.5 py-0.5 rounded pointer-events-none shadow-sm border border-teal-500/30
-                      ${(pieceIndex + 1) >= 7 ? 'bottom-1 left-1' : (pieceIndex + 1) === 6 ? 'top-1 right-1' : 'top-1 left-1'}
+                    className={`absolute text-sm font-black text-white bg-teal-600 px-2 py-1 rounded shadow-lg border border-teal-400 z-10
+                      ${(pieceIndex + 1) >= 7 ? 'bottom-2 left-2' : (pieceIndex + 1) === 6 ? 'top-2 right-2' : 'top-2 left-2'}
                     `}
                   >
                     {pieceIndex + 1}
