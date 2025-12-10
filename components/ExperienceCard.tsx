@@ -70,7 +70,20 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({ item, index }) =
                 <time className="font-mono text-xs text-teal-400 bg-teal-500/10 px-2 py-1 rounded border border-teal-500/20 w-fit">{date}</time>
             </div>
             <p className="text-sm font-semibold text-teal-400/80 mb-3 [transform:translateZ(15px)] uppercase tracking-wide">{subtitle}</p>
-            <p className="text-slate-400 leading-relaxed [transform:translateZ(10px)]">{description}</p>
+            <div className="text-slate-400 leading-relaxed [transform:translateZ(10px)] space-y-2">
+                {description.split('\n').map((line, i) => {
+                    const parts = line.split(':');
+                    if (parts.length > 1 && line.includes(':')) {
+                        return (
+                            <p key={i}>
+                                <strong className="text-slate-200">{parts[0]}:</strong>
+                                {parts.slice(1).join(':')}
+                            </p>
+                        );
+                    }
+                    return <p key={i}>{line}</p>;
+                })}
+            </div>
         </motion.div>
     </motion.div>
   );

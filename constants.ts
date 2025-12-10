@@ -40,21 +40,21 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
-    role: "Assistant DataAnalyst",
+    role: "Assistant Data Analyst",
     company: "DATASKAR",
     period: "Depuis 2022",
-    description: "Analyse et Suivi de Performance : Élaboration de bilans et rapports réguliers, avec mise à jour et suivi de tableaux de bord (via Power BI / Google Sheets) pour l'avancement des objectifs. Automatisation des Données : Conception de scripts (Python / TypeScript) pour l'automatisation de la collecte, du traitement et de l'intégration des données, améliorant la fiabilité et la rapidité du reporting."
+    description: "Analyse et Suivi de Performance : Élaboration de bilans et rapports réguliers, avec mise à jour et suivi de tableaux de bord (via Power BI / Google Sheets) pour l'avancement des objectifs.\nAutomatisation des Données : Conception de scripts (Python / TypeScript) pour l'automatisation de la collecte, du traitement et de l'intégration des données, améliorant la fiabilité et la rapidité du reporting."
   },
   {
-    role: "OPERATEUR DE GESTION FACTURE",
+    role: "Opérateur de Gestion Facture",
     company: "EASY TECH",
     period: "Oct 2020 - 2022",
-    description: "Analyse de différent type de facture (maladie et hospitalisation). Traitement et validation de facture (suivi des paiements, relance des impayés et la gestion des litiges."
+    description: "Analyse de factures : Analyse de différents types de factures (maladie et hospitalisation).\nTraitement et validation : Suivi des paiements, relance des impayés et gestion des litiges."
   },
   {
-    role: "OPERATEUR ON LINE",
+    role: "Opérateur On Line",
     company: "Vivetic",
-    period: "23 Mars 2018 - Juillet 2020",
+    period: "Mars 2018 - Juil. 2020",
     description: "Suivi et Gestion des Opérations Financières : Traitement de données liées aux factures et abonnements (incluant les réclamations et demandes de remboursement), comparable au suivi des créances et des dépassements."
   },
   {
