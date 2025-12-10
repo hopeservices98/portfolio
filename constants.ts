@@ -40,6 +40,12 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
+    role: "Data Analyst",
+    company: "Societe Datascar",
+    period: "Nov. 2022 - Nov. 2025",
+    description: "Collecte, traitement et analyse de grandes quantités de données pour identifier des tendances, créer des rapports et aider à la prise de décision. Utilisation de Python, SQL et des outils de visualisation."
+  },
+  {
     role: "Développeur Python",
     company: "Mada Assist",
     period: "Fév. 2024 - Présent",
@@ -50,12 +56,6 @@ export const experiences: Experience[] = [
     company: "Missions Indépendantes",
     period: "2023 - Présent",
     description: "Spécialisé en web scraping avancé et analyse de données. Développement de scripts d'automatisation pour la collecte de données et création de pipelines pour la manipulation et l'analyse de données."
-  },
-  {
-    role: "Data Analyst",
-    company: "Societe Datascar",
-    period: "Fév. 2021 - Déc. 2023",
-    description: "Collecte, traitement et analyse de grandes quantités de données pour identifier des tendances, créer des rapports et aider à la prise de décision. Utilisation de Python, SQL et des outils de visualisation."
   },
   {
     role: "Développeur Python (Stagiaire)",
@@ -73,10 +73,10 @@ export const formations: Formation[] = [
         specialization: "Scraping éthique et avancé, manipulation et analyse de données."
     },
     {
-        degree: "Maitrise",
-        school: "Ecole Nationale d'Informatique (ENI)",
+        degree: "Licence Professionnelle en Informatique et Télécommunication",
+        school: "GSI MADAGASCAR",
         year: "2015 - 2019",
-        specialization: "Formation approfondie en ingénierie logicielle, incluant la conception de systèmes d'information, le développement web et mobile, la gestion de bases de données, la sécurité informatique, et les méthodes agiles. L'ENI est reconnue comme le premier centre de formation et de recherche en informatique à Madagascar."
+        specialization: "Formation polyvalente en informatique et télécommunications, couvrant le développement logiciel, l'administration réseaux, et les technologies de communication. Acquisition de compétences pratiques en gestion de projets informatiques et en maintenance des systèmes."
     },
     {
         degree: "Baccalauréat",

@@ -32,23 +32,26 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
         {/* Face arrière */}
         <div className="absolute inset-0 h-full w-full rounded-xl bg-slate-800 p-8 border border-teal-500/50 [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col shadow-xl shadow-teal-900/20">
-          <h3 className="text-xl font-bold text-teal-400 mb-4">{project.title}</h3>
-          <p className="text-slate-300 text-sm mb-6 flex-grow overflow-y-auto leading-relaxed custom-scrollbar">{project.description}</p>
-          <div className="flex flex-wrap gap-2 mb-6">
+          <h3 className="text-lg font-bold text-teal-400 mb-2">{project.title}</h3>
+          <p className="text-slate-300 text-xs mb-4 flex-grow overflow-y-auto leading-relaxed custom-scrollbar pr-1">{project.description}</p>
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {project.technologies.map((tech) => (
-              <span key={tech} className="bg-slate-700/50 text-teal-200/70 text-xs font-mono px-2 py-1 rounded border border-slate-600/30">
+              <span key={tech} className="bg-slate-700/50 text-teal-200/70 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-600/30">
                 {tech}
               </span>
             ))}
           </div>
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-slate-900 bg-teal-500 hover:bg-teal-400 font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-teal-500/20"
-          >
-            Voir le projet
-          </a>
+          <div className="flex justify-center pt-2 border-t border-slate-700/50">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-slate-900 bg-teal-500 hover:bg-teal-400 font-bold py-1.5 px-4 rounded-full text-xs transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-teal-500/20"
+            >
+              <span>Voir le projet</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
