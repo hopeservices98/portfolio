@@ -63,29 +63,31 @@ export const TextPuzzle: React.FC<TextPuzzleProps> = ({ fullText }) => {
 
       <div className="relative bg-slate-800 p-1 rounded border border-slate-700 shadow-lg">
         {isSolved ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
-            className="relative p-8 rounded-xl border border-teal-500/50 bg-slate-900/90 backdrop-blur-xl shadow-[0_0_30px_rgba(20,184,166,0.2)] overflow-hidden group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-blue-500/10 pointer-events-none" />
-            
+          <div className="relative">
             <motion.div
-              initial={{ y: -20, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-black px-4 py-2 rounded-full shadow-xl shadow-orange-500/30 transform rotate-6 border-2 border-white z-20 animate-pulse"
+              className="absolute -top-6 right-0 md:-right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-black px-4 py-2 rounded-full shadow-xl shadow-orange-500/30 transform rotate-3 border-2 border-white z-30 animate-pulse"
             >
               MISSION ACCOMPLIE ! 🚀
             </motion.div>
 
-            <div className="relative z-0 text-slate-200 text-sm md:text-base font-medium leading-relaxed tracking-wide">
-              <HighlightTech text={fullText} />
-            </div>
-            
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-blue-500 to-teal-500 opacity-50" />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
+              className="relative p-8 rounded-xl border border-teal-500/50 bg-slate-900/90 backdrop-blur-xl shadow-[0_0_30px_rgba(20,184,166,0.2)] overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-blue-500/10 pointer-events-none" />
+              
+              <div className="relative z-0 text-slate-200 text-sm md:text-base font-medium leading-relaxed tracking-wide">
+                <HighlightTech text={fullText} />
+              </div>
+              
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-blue-500 to-teal-500 opacity-50" />
+            </motion.div>
+          </div>
         ) : (
           <div
             className="grid grid-cols-3 gap-0.5 bg-slate-900 p-0.5"
