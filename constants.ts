@@ -40,16 +40,22 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
-    role: "Data Analyst",
-    company: "Societe Datascar",
-    period: "Nov. 2022 - Nov. 2025",
-    description: "Collecte, traitement et analyse de grandes quantités de données pour identifier des tendances, créer des rapports et aider à la prise de décision. Utilisation de Python, SQL et des outils de visualisation."
+    role: "Assistant DataAnalyst",
+    company: "DATASKAR",
+    period: "Depuis 2022",
+    description: "Analyse et Suivi de Performance : Élaboration de bilans et rapports réguliers, avec mise à jour et suivi de tableaux de bord (via Power BI / Google Sheets) pour l'avancement des objectifs. Automatisation des Données : Conception de scripts (Python / TypeScript) pour l'automatisation de la collecte, du traitement et de l'intégration des données, améliorant la fiabilité et la rapidité du reporting."
   },
   {
-    role: "Développeur Python",
-    company: "Mada Assist",
-    period: "Fév. 2024 - Présent",
-    description: "Développement et maintenance d'applications web backend en Python/Django, implémentation d'API RESTful, analyse de données, création de tableaux de bord et intégration de solutions de paiement."
+    role: "OPERATEUR DE GESTION FACTURE",
+    company: "EASY TECH",
+    period: "Oct 2020 - 2022",
+    description: "Analyse de différent type de facture (maladie et hospitalisation). Traitement et validation de facture (suivi des paiements, relance des impayés et la gestion des litiges."
+  },
+  {
+    role: "OPERATEUR ON LINE",
+    company: "Vivetic",
+    period: "23 Mars 2018 - Juillet 2020",
+    description: "Suivi et Gestion des Opérations Financières : Traitement de données liées aux factures et abonnements (incluant les réclamations et demandes de remboursement), comparable au suivi des créances et des dépassements."
   },
   {
     role: "Développeur Python Freelance",
