@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 import { Section } from './components/Section';
 import { ProjectCard } from './components/ProjectCard';
 import { ExperienceCard } from './components/ExperienceCard';
+import { FormationCard } from './components/FormationCard';
 import { SkillBadge } from './components/SkillBadge';
 import { SocialLinks } from './components/SocialLinks';
 import { Footer } from './components/Footer';
@@ -50,9 +51,9 @@ const App: React.FC = () => {
         </Section>
 
         <Section title="Formations" id="formations">
-          <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {formations.map((formation, index) => (
-              <ExperienceCard key={index} item={formation} index={index} />
+              <FormationCard key={index} formation={formation} index={index} />
             ))}
           </div>
         </Section>
