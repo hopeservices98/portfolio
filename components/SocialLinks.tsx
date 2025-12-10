@@ -44,15 +44,32 @@ const SocialCard: React.FC<SocialCardProps> = ({ href, icon, label, color, detai
     }
   };
 
+  const getColorClasses = (colorName: string) => {
+    const colors: {[key: string]: string} = {
+      blue: 'border-blue-500/30 text-blue-400 group-hover:shadow-blue-500/20 bg-blue-500/10',
+      gray: 'border-gray-500/30 text-gray-400 group-hover:shadow-gray-500/20 bg-gray-500/10',
+      teal: 'border-teal-500/30 text-teal-400 group-hover:shadow-teal-500/20 bg-teal-500/10',
+      green: 'border-green-500/30 text-green-400 group-hover:shadow-green-500/20 bg-green-500/10',
+      red: 'border-red-500/30 text-red-400 group-hover:shadow-red-500/20 bg-red-500/10',
+    };
+    return colors[colorName] || colors.gray;
+  };
+
+  const colorClass = getColorClasses(color);
+
   return (
-    <div className="group h-24 w-full [perspective:1000px]">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="group h-24 w-full [perspective:1000px]"
+    >
       <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         {/* Face avant */}
-        <div className={`absolute inset-0 h-full w-full flex items-center gap-3 p-4 bg-slate-800/50 rounded-xl border border-slate-700 [backface-visibility:hidden] shadow-lg`}>
-          <div className={`p-2 rounded-lg bg-slate-700/50 text-${color}-400`}>
-            {icon}
+        <div className={`absolute inset-0 h-full w-full flex items-center gap-4 p-4 rounded-xl border bg-slate-900/60 backdrop-blur-md shadow-lg transition-all duration-300 ${colorClass}`}>
+          <div className={`p-3 rounded-lg bg-slate-800/80 shadow-inner`}>
+            {React.cloneElement(icon as React.ReactElement, { width: 28, height: 28 })}
           </div>
-          <span className="font-medium text-slate-300">{label}</span>
+          <span className="font-bold text-lg tracking-wide text-slate-200">{label}</span>
         </div>
 
         {/* Face arrière */}
@@ -61,14 +78,14 @@ const SocialCard: React.FC<SocialCardProps> = ({ href, icon, label, color, detai
           target="_blank"
           rel="noopener noreferrer"
           onClick={copyValue ? handleCopy : undefined}
-          className={`absolute inset-0 h-full w-full flex items-center justify-center p-4 bg-slate-800 rounded-xl border border-${color}-500 [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-lg hover:bg-slate-700 transition-colors cursor-pointer`}
+          className={`absolute inset-0 h-full w-full flex items-center justify-center p-4 rounded-xl border bg-slate-900/90 backdrop-blur-xl [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl hover:bg-slate-800 transition-colors cursor-pointer ${colorClass.split(' ')[0]}`}
         >
-          <span className={`text-sm font-medium text-${color}-400 text-center`}>
+          <span className={`text-sm font-bold text-center ${colorClass.split(' ')[1]}`}>
             {copied ? "Copié !" : detail}
           </span>
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
