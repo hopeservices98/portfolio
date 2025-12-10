@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { HighlightTech } from './HighlightTech';
 import type { Experience, Formation } from '../types';
 
 interface ExperienceCardProps {
@@ -77,11 +78,11 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({ item, index }) =
                         return (
                             <p key={i}>
                                 <strong className="text-slate-200">{parts[0]}:</strong>
-                                {parts.slice(1).join(':')}
+                                <HighlightTech text={parts.slice(1).join(':')} />
                             </p>
                         );
                     }
-                    return <p key={i}>{line}</p>;
+                    return <p key={i}><HighlightTech text={line} /></p>;
                 })}
             </div>
         </motion.div>

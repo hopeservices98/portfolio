@@ -1,4 +1,5 @@
 import React from 'react';
+import { HighlightTech } from './HighlightTech';
 import type { Project } from '../types';
 
 interface ProjectCardProps {
@@ -33,7 +34,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         {/* Face arrière */}
         <div className="absolute inset-0 h-full w-full rounded-xl bg-slate-800 p-8 border border-teal-500/50 [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col shadow-xl shadow-teal-900/20">
           <h3 className="text-lg font-bold text-teal-400 mb-2">{project.title}</h3>
-          <p className="text-slate-300 text-xs mb-4 flex-grow overflow-y-auto leading-relaxed custom-scrollbar pr-1">{project.description}</p>
+          <p className="text-slate-300 text-xs mb-4 flex-grow overflow-y-auto leading-relaxed custom-scrollbar pr-1">
+            <HighlightTech text={project.description} />
+          </p>
           <div className="flex flex-wrap gap-1.5 mb-4">
             {project.technologies.map((tech) => (
               <span key={tech} className="bg-slate-700/50 text-teal-200/70 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-600/30">
