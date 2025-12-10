@@ -1,10 +1,10 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useIsMobile } from './hooks/useIsMobile';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Header } from './components/Header';
-import { Section } from './components/Section';
+import { Section as PortfolioSection } from './components/Section';
 import { ProjectCard } from './components/ProjectCard';
 import { ExperienceCard } from './components/ExperienceCard';
 import { FormationCard } from './components/FormationCard';
@@ -13,53 +13,114 @@ import { SocialLinks } from './components/SocialLinks';
 import { Footer } from './components/Footer';
 import { projects, experiences, formations, skills } from './constants';
 
+// Landing Page Imports
+import ParticleBackground from './components/landing/ParticleBackground';
+import Navigation from './components/landing/Navigation';
+import Hero from './components/landing/Hero';
+import About from './components/landing/About';
+import ProjectsLanding from './components/landing/Projects';
+import Contact from './components/landing/Contact';
+import AiAssistant from './components/landing/AiAssistant';
+import { Section as LandingSection } from './types/landing';
+
 const App: React.FC = () => {
   const isMobile = useIsMobile();
+  const [showPortfolio, setShowPortfolio] = useState(false);
+  const [activeLandingSection, setActiveLandingSection] = useState<LandingSection | string>(LandingSection.HOME);
+
+  // Scroll handling for Landing Page
+  const scrollToLandingSection = (section: LandingSection | string) => {
+    if (section === 'main-portfolio') {
+      setShowPortfolio(true);
+      setTimeout(() => {
+        const portfolioElement = document.getElementById('main-portfolio');
+        if (portfolioElement) {
+          portfolioElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
+    const element = document.getElementById(section as string);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setActiveLandingSection(section);
+    }
+  };
 
   return (
-    <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30">
+    <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30 text-gray-200">
       {!isMobile && <CustomCursor />}
-      <Navbar />
-      <main className="container mx-auto max-w-5xl px-6 py-12 md:py-24 flex flex-col gap-20 md:gap-32">
-        <div className="flex flex-col gap-10 md:gap-16">
-          <Header />
-          <SocialLinks />
+      
+      {!showPortfolio && (
+        <>
+          <ParticleBackground />
+          <Navigation
+            activeSection={activeLandingSection}
+            scrollToSection={scrollToLandingSection}
+          />
+          <main className="relative z-10">
+            <Hero scrollToSection={scrollToLandingSection} />
+            <About />
+            <ProjectsLanding />
+            <Contact />
+          </main>
+          <AiAssistant />
+        </>
+      )}
+
+      {showPortfolio && (
+        <div id="main-portfolio" className="animate-fade-in-up">
+          <Navbar />
+          <main className="container mx-auto max-w-5xl px-6 py-12 md:py-24 flex flex-col gap-20 md:gap-32">
+            <div className="flex flex-col gap-10 md:gap-16">
+              <Header />
+              <SocialLinks />
+            </div>
+
+            <PortfolioSection title="Compétences" id="competences">
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <SkillBadge key={skill} skill={skill} />
+                ))}
+              </div>
+            </PortfolioSection>
+
+            <PortfolioSection title="Projets" id="projets">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+                {projects.map((project, index) => (
+                  <ProjectCard key={index} project={project} />
+                ))}
+              </div>
+            </PortfolioSection>
+
+            <PortfolioSection title="Expériences Professionnelles" id="experiences">
+              <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
+                {experiences.map((exp, index) => (
+                  <ExperienceCard key={index} item={exp} index={index} />
+                ))}
+              </div>
+            </PortfolioSection>
+
+            <PortfolioSection title="Formations" id="formations">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {formations.map((formation, index) => (
+                  <FormationCard key={index} formation={formation} index={index} />
+                ))}
+              </div>
+            </PortfolioSection>
+            
+            <Footer />
+          </main>
         </div>
-
-        <Section title="Compétences" id="competences">
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <SkillBadge key={skill} skill={skill} />
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Projets" id="projets">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Expériences Professionnelles" id="experiences">
-          <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
-            {experiences.map((exp, index) => (
-              <ExperienceCard key={index} item={exp} index={index} />
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Formations" id="formations">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {formations.map((formation, index) => (
-              <FormationCard key={index} formation={formation} index={index} />
-            ))}
-          </div>
-        </Section>
-        
-        <Footer />
-      </main>
+      )}
     </div>
   );
 };
