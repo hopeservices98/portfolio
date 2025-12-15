@@ -27,9 +27,18 @@ import { Section as LandingSection } from './types/landing';
 const App: React.FC = () => {
   const isMobile = useIsMobile();
   const [showPortfolio, setShowPortfolio] = useState(false);
+
+  useEffect(() => {
+    if (window.location.hash === '#portfolio') {
+      setShowPortfolio(true);
+    }
+  }, []);
+
   const scrollToLandingSection = (section: LandingSection | string) => {
     if (section === 'main-portfolio') {
       setShowPortfolio(true);
+      // Change the URL hash without triggering a full reload
+      window.history.pushState(null, '', '#portfolio');
       setTimeout(() => {
         const portfolioElement = document.getElementById('main-portfolio');
         if (portfolioElement) {
