@@ -10,13 +10,15 @@ export const projects: Project[] = [
     title: "Application Web E-commerce",
     description: "Développement d'une application de commerce électronique complète avec Flask, Stripe pour les paiements, et une base de données PostgreSQL. Inclut un panier d'achat, un système de gestion des commandes et une interface administrateur.",
     technologies: ["Flask", "PostgreSQL", "Stripe API", "Jinja2", "HTML/CSS"],
-    link: "https://www.moramarket.mg/?srsltid=AfmBOop5SSFF7q5drXHf4iPrKUkJXh8yU6a8HyxVSRjDZC_RrgR9iDNj"
+    link: "https://www.moramarket.mg/?srsltid=AfmBOop5SSFF7q5drXHf4iPrKUkJXh8yU6a8HyxVSRjDZC_RrgR9iDNj",
+    image: "/Application Web E-commerce.png"
   },
   {
     title: "Site Web Cabinet Rabemananjara",
     description: "Développement du site vitrine pour le Cabinet Rabemananjara, expert en propriété industrielle à Madagascar. Présentation des services de protection des marques, brevets et dessins industriels.",
     technologies: ["React", "Tailwind CSS", "Responsive Design"],
-    link: "https://cip-rabemananjara.mg/"
+    link: "https://cip-rabemananjara.mg/",
+    image: "/Site Web Cabinet Rabemananjara.png"
   },
   {
     title: "Site Web Hope Services",

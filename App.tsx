@@ -15,20 +15,18 @@ import { projects, experiences, formations, skills } from './constants';
 
 // Landing Page Imports
 import ParticleBackground from './components/landing/ParticleBackground';
-import Navigation from './components/landing/Navigation';
-import Hero from './components/landing/Hero';
-import About from './components/landing/About';
-import ProjectsLanding from './components/landing/Projects';
-import Contact from './components/landing/Contact';
+import LandingCarousel from './components/landing/LandingCarousel';
+import HeroSlide from './components/landing/HeroSlide';
+import AboutSlide from './components/landing/AboutSlide';
+import ProjectsSlide from './components/landing/ProjectsSlide';
+import ChatbotSlide from './components/landing/ChatbotSlide';
+import ContactSlide from './components/landing/ContactSlide';
 import AiAssistant from './components/landing/AiAssistant';
 import { Section as LandingSection } from './types/landing';
 
 const App: React.FC = () => {
   const isMobile = useIsMobile();
   const [showPortfolio, setShowPortfolio] = useState(false);
-  const [activeLandingSection, setActiveLandingSection] = useState<LandingSection | string>(LandingSection.HOME);
-
-  // Scroll handling for Landing Page
   const scrollToLandingSection = (section: LandingSection | string) => {
     if (section === 'main-portfolio') {
       setShowPortfolio(true);
@@ -38,22 +36,16 @@ const App: React.FC = () => {
           portfolioElement.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
-      return;
-    }
-
-    const element = document.getElementById(section as string);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      setActiveLandingSection(section);
     }
   };
+
+  const landingSlides = [
+    <HeroSlide scrollToSection={scrollToLandingSection} />,
+    <AboutSlide />,
+    <ProjectsSlide scrollToSection={scrollToLandingSection} />,
+    <ChatbotSlide />,
+    <ContactSlide scrollToSection={scrollToLandingSection} />,
+  ];
 
   return (
     <div className="min-h-screen font-sans bg-slate-900 selection:bg-teal-500/30 text-gray-200">
@@ -62,16 +54,7 @@ const App: React.FC = () => {
       {!showPortfolio && (
         <>
           <ParticleBackground />
-          <Navigation
-            activeSection={activeLandingSection}
-            scrollToSection={scrollToLandingSection}
-          />
-          <main className="relative z-10">
-            <Hero scrollToSection={scrollToLandingSection} />
-            <About />
-            <ProjectsLanding />
-            <Contact />
-          </main>
+          <LandingCarousel slides={landingSlides} scrollToSection={scrollToLandingSection} />
           <AiAssistant />
         </>
       )}

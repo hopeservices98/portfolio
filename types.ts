@@ -4,6 +4,7 @@ export interface Project {
   description: string;
   technologies: string[];
   link: string;
+  image?: string; // Ajout de la propriété image optionnelle
 }
 
 export interface Experience {

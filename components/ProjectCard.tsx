@@ -11,24 +11,39 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     <div className="group h-80 [perspective:1000px]">
       <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         {/* Face avant */}
-        <div className="absolute inset-0 h-full w-full rounded-xl bg-slate-800/40 p-8 border border-slate-700/50 flex flex-col items-center justify-center [backface-visibility:hidden] hover:border-teal-500/30 transition-colors">
-          <h3 className="text-2xl font-bold text-slate-100 text-center mb-6">{project.title}</h3>
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {project.technologies.slice(0, 3).map((tech) => (
-              <span key={tech} className="bg-slate-700/50 text-teal-200/80 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-600/50">
-                {tech}
-              </span>
-            ))}
-            {project.technologies.length > 3 && (
-              <span className="bg-slate-700/50 text-slate-400 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-600/50">
-                +{project.technologies.length - 3}
-              </span>
-            )}
-          </div>
-          <div className="flex items-center gap-2 text-teal-400/80 text-sm font-medium animate-pulse">
-            <span>Survolez pour voir les détails</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-          </div>
+        <div className="absolute inset-0 h-full w-full rounded-xl [backface-visibility:hidden]">
+          {project.image ? (
+            <div className="h-full w-full hover:border-teal-500/30 transition-colors overflow-hidden border border-slate-700/50 rounded-xl">
+              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6">
+                <h3 className="text-2xl font-bold text-slate-100 text-center mb-4">{project.title}</h3>
+                <div className="flex items-center gap-2 text-teal-400/80 text-sm font-medium animate-pulse">
+                  <span>Survolez pour voir les détails</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="h-full w-full rounded-xl bg-slate-800/40 p-8 border border-slate-700/50 flex flex-col items-center justify-center hover:border-teal-500/30 transition-colors">
+              <h3 className="text-2xl font-bold text-slate-100 text-center mb-6">{project.title}</h3>
+              <div className="flex flex-wrap justify-center gap-2 mb-8">
+                {project.technologies.slice(0, 3).map((tech) => (
+                  <span key={tech} className="bg-slate-700/50 text-teal-200/80 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-600/50">
+                    {tech}
+                  </span>
+                ))}
+                {project.technologies.length > 3 && (
+                  <span className="bg-slate-700/50 text-slate-400 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-600/50">
+                    +{project.technologies.length - 3}
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2 text-teal-400/80 text-sm font-medium animate-pulse">
+                <span>Survolez pour voir les détails</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Face arrière */}

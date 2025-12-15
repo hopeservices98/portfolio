@@ -11,12 +11,14 @@ const ParticleBackground: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let particles: { x: number; y: number; vx: number; vy: number; size: number }[] = [];
+    let particles: { x: number; y: number; vx: number; vy: number; size: number; color: string }[] = [];
+    const mouse = { x: 0, y: 0, radius: 150 };
     
     // Configuration
-    const particleCount = 60;
-    const connectionDistance = 150;
-    const moveSpeed = 0.5;
+    const particleCount = 150;
+    const connectionDistance = 120;
+    const moveSpeed = 0.4;
+    const colors = ['#2dd4bf', '#00f0ff', '#ffffff'];
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -32,6 +34,7 @@ const ParticleBackground: React.FC = () => {
           vx: (Math.random() - 0.5) * moveSpeed,
           vy: (Math.random() - 0.5) * moveSpeed,
           size: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
     };
@@ -41,6 +44,16 @@ const ParticleBackground: React.FC = () => {
       
       // Update and draw particles
       particles.forEach((p, i) => {
+        // Mouse interaction
+        const dxMouse = mouse.x - p.x;
+        const dyMouse = mouse.y - p.y;
+        const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+        if (distMouse < mouse.radius) {
+          const force = (mouse.radius - distMouse) / mouse.radius;
+          p.x -= dxMouse * force * 0.05;
+          p.y -= dyMouse * force * 0.05;
+        }
+
         p.x += p.vx;
         p.y += p.vy;
 
@@ -50,7 +63,7 @@ const ParticleBackground: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(45, 212, 191, 0.5)'; // Teal
+        ctx.fillStyle = p.color;
         ctx.fill();
 
         // Draw connections
@@ -62,7 +75,8 @@ const ParticleBackground: React.FC = () => {
 
           if (dist < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(45, 212, 191, ${1 - dist / connectionDistance})`;
+            const opacity = 1 - dist / connectionDistance;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.3})`; // White connections
             ctx.lineWidth = 0.5;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
@@ -74,12 +88,18 @@ const ParticleBackground: React.FC = () => {
       animationFrameId = requestAnimationFrame(draw);
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     initParticles();
     draw();
 
     return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
