@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Bot, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { ChatMessage } from '../../types/landing';
 import { sendMessageToGemini } from '../../services/geminiService';
 
@@ -104,9 +106,17 @@ const AiAssistant: React.FC = () => {
                         ? 'bg-teal-500 text-slate-900 font-medium rounded-br-none'
                         : 'bg-white/10 text-gray-200 rounded-bl-none'
                     }`}
-                  >
-                    {msg.text}
-                  </div>
+                    >
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      className="prose prose-sm prose-invert"
+                      components={{
+                        strong: ({node, ...props}) => <strong className="text-teal-400" {...props} />,
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
+                    </div>
                 </div>
               ))}
               {isLoading && (
