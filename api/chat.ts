@@ -31,7 +31,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
   try {
     const ai = new GoogleGenAI({ apiKey });
     const chat = ai.chats.create({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.7,
