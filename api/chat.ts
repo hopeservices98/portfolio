@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const SYSTEM_INSTRUCTION = `
 You are "Angelo AI", a futuristic virtual assistant for Angelo's portfolio landing page.
@@ -14,17 +15,17 @@ If asked about projects, provide a brief summary of his skills.
 Keep responses under 50 words unless asked for a detailed technical explanation. Be professional but futuristic in tone.
 `;
 
-export default async function (req: Request) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405 });
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { history, newMessage } = await req.json();
+  const { history, newMessage } = req.body;
 
   const apiKey = process.env.GOOGLE_API_KEY;
 
   if (!apiKey) {
-    return new Response(JSON.stringify({ error: 'API Key is missing.' }), { status: 500 });
+    return res.status(500).json({ error: 'API Key is missing.' });
   }
 
   try {
@@ -44,9 +45,9 @@ export default async function (req: Request) {
     const result = await chat.sendMessage({ message: newMessage });
     const responseText = result.text || "I'm processing that... (No text returned)";
 
-    return new Response(JSON.stringify({ response: responseText }), { status: 200 });
+    return res.status(200).json({ response: responseText });
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return new Response(JSON.stringify({ error: 'Connection interrupted. My neural link is experiencing static.' }), { status: 500 });
+    return res.status(500).json({ error: 'Connection interrupted. My neural link is experiencing static.' });
   }
 }
