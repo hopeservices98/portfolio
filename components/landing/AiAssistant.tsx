@@ -7,7 +7,7 @@ import { sendMessageToGemini } from '../../services/geminiService';
 const AiAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: 'Hello! I am Angelo AI. Ask me anything about Angelo\'s portfolio, skills, or experience.', timestamp: new Date() }
+    { role: 'model', text: 'Bonjour ! Je suis l\'assistant IA d\'Angelo. Posez-moi une question ou demandez-moi de vous guider vers son portfolio pour découvrir ses projets.', timestamp: new Date() }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -51,14 +51,14 @@ const AiAssistant: React.FC = () => {
     <>
       {/* Floating Toggle Button */}
       <motion.button
-        className="fixed bottom-6 right-6 z-50 p-4 bg-teal-500 text-slate-900 rounded-full shadow-[0_0_20px_rgba(45,212,191,0.4)] hover:scale-110 transition-transform"
+        className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-br from-purple-600 to-blue-500 text-white rounded-full shadow-[0_0_20px_rgba(147,51,234,0.5)] hover:scale-110 transition-transform"
         onClick={() => setIsOpen(true)}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ rotate: 15 }}
       >
-        <Bot className="w-6 h-6" />
-        <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
+        <MessageSquare className="w-6 h-6" />
+        <span className="absolute -top-1 -right-1 w-3 h-3 bg-teal-400 rounded-full animate-ping"></span>
       </motion.button>
 
       {/* Chat Interface Modal */}
@@ -71,13 +71,15 @@ const AiAssistant: React.FC = () => {
             className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] bg-slate-900/95 backdrop-blur-xl rounded-xl flex flex-col shadow-2xl z-50 border border-teal-500/20"
           >
             {/* Header */}
-            <div className="p-4 border-b border-white/10 flex justify-between items-center bg-teal-500/5 rounded-t-xl">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-teal-400" />
-                <h3 className="font-bold text-white">Angelo AI</h3>
+            <div className="p-4 flex justify-between items-center bg-gradient-to-r from-purple-600/20 to-blue-500/20 rounded-t-xl">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-purple-600 to-blue-500 rounded-full">
+                    <Bot className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="font-bold text-white tracking-wide">Assistant IA</h3>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)} 
+              <button
+                onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
@@ -89,13 +91,18 @@ const AiAssistant: React.FC = () => {
               {messages.map((msg, index) => (
                 <div
                   key={index}
-                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
+                  {msg.role === 'model' && (
+                      <div className="w-6 h-6 bg-gradient-to-br from-purple-600 to-blue-500 rounded-full flex-shrink-0 flex items-center justify-center">
+                          <Bot className="w-4 h-4 text-white" />
+                      </div>
+                  )}
                   <div
                     className={`max-w-[80%] p-3 rounded-lg text-sm leading-relaxed ${
                       msg.role === 'user'
                         ? 'bg-teal-500 text-slate-900 font-medium rounded-br-none'
-                        : 'bg-white/10 text-gray-200 rounded-bl-none border border-white/5'
+                        : 'bg-white/10 text-gray-200 rounded-bl-none'
                     }`}
                   >
                     {msg.text}
