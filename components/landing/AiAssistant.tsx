@@ -107,15 +107,16 @@ const AiAssistant: React.FC = () => {
                         : 'bg-white/10 text-gray-200 rounded-bl-none'
                     }`}
                     >
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      className="prose prose-sm prose-invert"
-                      components={{
-                        strong: ({node, ...props}) => <strong className="text-teal-400" {...props} />,
-                      }}
-                    >
-                      {msg.text}
-                    </ReactMarkdown>
+                    <div className="prose prose-sm prose-invert max-w-full">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          strong: ({node, ...props}) => <strong className="text-teal-400" {...props} />,
+                        }}
+                      >
+                        {msg.text}
+                      </ReactMarkdown>
+                    </div>
                     </div>
                 </div>
               ))}

@@ -61,7 +61,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
   // Détection de mots-clés pour une réponse spécifique et enrichie
   const lowerCaseMessage = newMessage.toLowerCase();
   if (lowerCaseMessage.includes('portfolio') || lowerCaseMessage.includes('lien') || lowerCaseMessage.includes('projets')) {
-    const portfolioResponse = `Absolument ! 🚀 Voici le lien direct pour plonger dans le **portfolio principal d'Angelo RAKOTONIRINA** : [https://portfolio-angelo.vercel.app/](https://portfolio-angelo.vercel.app/)
+    const portfolioResponse = `Absolument ! 🚀 Voici le lien direct pour plonger dans le **portfolio principal d'Angelo RAKOTONIRINA** : [**https://angeloportfolio.vercel.app/**](https://angeloportfolio.vercel.app/)
 
 En explorant son portfolio, vous découvrirez des démonstrations concrètes de ses compétences en :
 - **Automatisation des données (Python, TypeScript)** 🤖
