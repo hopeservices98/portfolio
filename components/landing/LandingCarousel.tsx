@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Section } from '../../types/landing';
 
+// Define the structure for a slide, which now includes a background
+interface LandingSlide {
+  component: React.ReactNode;
+  background: string;
+}
+
 interface LandingCarouselProps {
-  slides: React.ReactNode[];
+  slides: LandingSlide[];
   scrollToSection: (section: Section | string) => void;
 }
 
@@ -33,7 +39,7 @@ const LandingCarousel: React.FC<LandingCarouselProps> = ({ slides, scrollToSecti
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const paginate = (newDirection: number) => {
+  const paginate = useCallback((newDirection: number) => {
     setDirection(newDirection);
     setPage((prevPage) => {
       const newPage = prevPage + newDirection;
@@ -41,7 +47,7 @@ const LandingCarousel: React.FC<LandingCarouselProps> = ({ slides, scrollToSecti
       if (newPage >= slides.length) return 0;
       return newPage;
     });
-  };
+  }, [slides.length]);
 
   const currentSlideIndex = page % slides.length;
 
@@ -49,35 +55,50 @@ const LandingCarousel: React.FC<LandingCarouselProps> = ({ slides, scrollToSecti
   useEffect(() => {
     const timer = setInterval(() => {
       paginate(1);
-    }, 10000); // Change slide every 10 seconds
+    }, 5000); // Change slide every 5 seconds
     return () => clearInterval(timer);
-  }, [page, slides.length]);
+  }, [paginate]);
 
   // Scroll-based navigation
   useEffect(() => {
     let isWheeling = false;
     const handleWheel = (e: WheelEvent) => {
-      if (!isWheeling) {
-        isWheeling = true;
-        if (e.deltaY > 0) {
-          paginate(1);
-        } else if (e.deltaY < 0) {
-          paginate(-1);
-        }
-        setTimeout(() => {
-          isWheeling = false;
-        }, 1000); // 1 second delay between scrolls
+      if (isWheeling) return;
+      isWheeling = true;
+      
+      if (e.deltaY > 50) { // Increased threshold
+        paginate(1);
+      } else if (e.deltaY < -50) { // Increased threshold
+        paginate(-1);
       }
+      
+      setTimeout(() => {
+        isWheeling = false;
+      }, 800); // Reduced delay
     };
-    window.addEventListener('wheel', handleWheel);
+    window.addEventListener('wheel', handleWheel, { passive: true });
     return () => window.removeEventListener('wheel', handleWheel);
   }, [paginate]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+      {/* Background Layer */}
+      <AnimatePresence>
+        <motion.div
+          key={`bg-${currentSlideIndex}`}
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, ease: 'easeInOut' }}
+          style={{ background: slides[currentSlideIndex].background }}
+        />
+      </AnimatePresence>
+
+      {/* Slide Content Layer */}
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
-          key={currentSlideIndex}
+          key={`content-${currentSlideIndex}`}
           custom={direction}
           variants={variants}
           initial="enter"
@@ -88,9 +109,9 @@ const LandingCarousel: React.FC<LandingCarouselProps> = ({ slides, scrollToSecti
             opacity: { duration: 0.2 },
             scale: { duration: 0.2 },
           }}
-          className="absolute w-full h-full flex items-center justify-center"
+          className="absolute w-full h-full flex items-center justify-center z-10"
         >
-          {slides[currentSlideIndex]}
+          {slides[currentSlideIndex].component}
         </motion.div>
       </AnimatePresence>
 

@@ -26,12 +26,17 @@ import { Section as LandingSection } from './types/landing';
 
 const App: React.FC = () => {
   const isMobile = useIsMobile();
-  const [showPortfolio, setShowPortfolio] = useState(false);
+  const [showPortfolio, setShowPortfolio] = useState(() => window.location.hash === '#portfolio');
 
   useEffect(() => {
-    if (window.location.hash === '#portfolio') {
-      setShowPortfolio(true);
-    }
+    const handleHashChange = () => {
+      setShowPortfolio(window.location.hash === '#portfolio');
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   const scrollToLandingSection = (section: LandingSection | string) => {
@@ -49,11 +54,26 @@ const App: React.FC = () => {
   };
 
   const landingSlides = [
-    <HeroSlide scrollToSection={scrollToLandingSection} />,
-    <AboutSlide />,
-    <ProjectsSlide scrollToSection={scrollToLandingSection} />,
-    <ChatbotSlide />,
-    <ContactSlide scrollToSection={scrollToLandingSection} />,
+    {
+      component: <HeroSlide scrollToSection={scrollToLandingSection} />,
+      background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.3), rgba(255, 255, 255, 0))',
+    },
+    {
+      component: <AboutSlide />,
+      background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(45, 212, 191, 0.3), rgba(255, 255, 255, 0))',
+    },
+    {
+      component: <ProjectsSlide scrollToSection={scrollToLandingSection} />,
+      background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(129, 140, 248, 0.3), rgba(255, 255, 255, 0))',
+    },
+    {
+      component: <ChatbotSlide />,
+      background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.3), rgba(255, 255, 255, 0))',
+    },
+    {
+      component: <ContactSlide scrollToSection={scrollToLandingSection} />,
+      background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(45, 212, 191, 0.2), rgba(255, 255, 255, 0))',
+    },
   ];
 
   return (
@@ -62,7 +82,7 @@ const App: React.FC = () => {
       
       {!showPortfolio && (
         <>
-          <ParticleBackground />
+          {/* <ParticleBackground /> */}
           <LandingCarousel slides={landingSlides} scrollToSection={scrollToLandingSection} />
           <AiAssistant />
         </>

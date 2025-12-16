@@ -62,47 +62,7 @@ const ProjectsSlide: React.FC<ProjectsSlideProps> = ({ scrollToSection }) => {
           </motion.button>
         </motion.div>
       </div>
-      {/* Background Ambience - Simplified */}
-      <motion.div 
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ 
-          scale: [0, 1.2, 1],
-          opacity: [0, 0.3, 0.15],
-        }}
-        transition={{ 
-          duration: 2, 
-          times: [0, 0.6, 1],
-          ease: "easeOut"
-        }}
-        className="absolute top-0 right-0 w-[800px] h-[800px] bg-teal-500/10 rounded-full blur-[100px] -z-10 pointer-events-none translate-x-1/3 -translate-y-1/3"
-      >
-        <motion.div
-           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-           className="w-full h-full"
-        />
-      </motion.div>
-
-       <motion.div 
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ 
-          scale: [0, 1.5, 1],
-          opacity: [0, 0.2, 0.1],
-        }}
-        transition={{ 
-          duration: 2.5, 
-          times: [0, 0.6, 1],
-          ease: "easeOut",
-          delay: 0.2
-        }}
-        className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] -z-10 pointer-events-none -translate-x-1/4 translate-y-1/4"
-      >
-         <motion.div
-           animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.7, 0.5] }}
-           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-           className="w-full h-full"
-        />
-      </motion.div>
+      {/* Background ambience is now handled by the LandingCarousel */}
     </section>
   );
 };
